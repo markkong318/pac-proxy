@@ -1,0 +1,32 @@
+{
+  "name": "pac-proxy",
+  "version": "1.0.0",
+  "description": "CLI utility for Link Game Platform",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "cd test && node --loader=esmock ../node_modules/jasmine/bin/jasmine.js",
+    "bats": "CMD=lgputil GAME_ID=`sed -n 's/^.*\"GAME_ID=\\([^\"]*\\).*/\\1/p' ./.github/workflows/suites.yml` LEADERBOARD_ID=`sed -n 's/^.*\"LEADERBOARD_ID=\\([^\"]*\\).*/\\1/p' ./.github/workflows/suites.yml` bats -j 3 ./test/bats/suites.bats"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markkong318/pac-proxy.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "pac-resolver": "^7.0.1",
+    "quickjs-emscripten": "^0.29.1",
+    "rg-commander": "^0.9.6"
+  },
+  "bin": {
+    "pac-proxy": "bin/index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/rakuten-games/lgputil/issues"
+  },
+  "homepage": "https://github.com/rakuten-games/lgputil#readme"
+}
