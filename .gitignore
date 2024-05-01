@@ -78,4 +78,4 @@ Thumbs.db
 .log
 
 # pac
-.pac
+*.pac
