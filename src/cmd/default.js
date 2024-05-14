@@ -4,9 +4,6 @@ import { createPacResolver } from 'pac-resolver';
 import { getQuickJS } from 'quickjs-emscripten';
 
 const action = async (file, options) => {
-  // await view.info.render({});
-  console.log('hello');
-
   const content = fs.readFileSync(file, 'utf8');
 
   const quickJS = await getQuickJS();

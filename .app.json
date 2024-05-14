@@ -1,11 +1,5 @@
 {
   "configStore": {
-    "allowKeys": [
-      "token",
-      "org",
-      "output",
-      "uri"
-    ]
-  },
-  "uri": "https://lg.rgames.jp/devapi/"
+    "allowKeys": []
+  }
 }
