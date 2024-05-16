@@ -1,12 +1,9 @@
-import fs from 'fs';
 import { program, api } from 'rg-commander';
 import { createPacResolver } from 'pac-resolver';
 import { getQuickJS } from 'quickjs-emscripten';
 
 const action = async (file, options) => {
   const content = await api.loadProxy({file});
-
-  console.log(content)
 
   const quickJS = await getQuickJS();
   const findProxy = createPacResolver(quickJS, content);
