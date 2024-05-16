@@ -4,7 +4,9 @@ import { createPacResolver } from 'pac-resolver';
 import { getQuickJS } from 'quickjs-emscripten';
 
 const action = async (file, options) => {
-  const content = fs.readFileSync(file, 'utf8');
+  const content = await api.loadProxy({file});
+
+  console.log(content)
 
   const quickJS = await getQuickJS();
   const findProxy = createPacResolver(quickJS, content);
