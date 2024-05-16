@@ -48,7 +48,7 @@ export default async ({findProxy, port}) => {
 
       let svrSoc;
       if (match) {
-        logger.info(`Proxy ${cliReq.url} -> ${match[1]}`);
+        logger.debug(`Proxy ${cliReq.url} -> ${match[1]}`);
 
         const svrReq = http.request({
           host: match[1], port: match[2],
