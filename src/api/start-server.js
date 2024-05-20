@@ -1,9 +1,29 @@
 import http from 'http';
 import net from 'net';
+import url from 'url';
 import { logger } from 'rg-commander';
 
 export default async ({findProxy, port}) => {
-  const server = http.createServer();
+  const server = http.createServer(function onCliReq(cliReq, cliRes) {
+    // http
+    let svrSoc;
+    const cliSoc = cliReq.socket, x = url.parse(cliReq.url);
+    const svrReq = http.request({host: x.hostname,
+      port:  x.port || 80,
+      path:  x.path,
+      method: cliReq.method, headers: cliReq.headers,
+      agent: cliSoc.$agent}, function onSvrRes(svrRes) {
+      svrSoc = svrRes.socket;
+      cliRes.writeHead(svrRes.statusCode, svrRes.headers);
+      svrRes.pipe(cliRes);
+    });
+    cliReq.pipe(svrReq);
+    svrReq.on('error', function onSvrReqErr(err) {
+      cliRes.writeHead(400, err.message, {'content-type': 'text/html'});
+      cliRes.end('<h1>' + err.message + '<br/>' + cliReq.url + '</h1>');
+      onErr(err, 'svrReq', x.hostname + ':' + (x.port || 80), svrSoc);
+    });
+  });
 
   server
     .on('clientError', (err, soc) => onErr(err, 'cliErr', '', soc))
