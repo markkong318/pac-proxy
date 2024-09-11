@@ -3,20 +3,22 @@ import fetch from 'node-fetch';
 import { logger } from 'rg-commander';
 
 export default async ({file}) => {
-  let content = '';
+  return await loadFromUrl(file) || await loadFromFile(file);
+};
 
-  if (file.startsWith('http://') || file.startsWith('https://')) {
-    const response = await fetch(file);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch ${file}: ${response.statusText}`);
-    }
-
-    content = await response.text();
-  } else {
-    content = await fs.readFileSync(file, 'utf8');
+async function loadFromUrl(file) {
+  if (!file.startsWith('http://') && !file.startsWith('https://')) {
+    return;
   }
 
-  logger.debug(`content: ${content}`);
+  const response = await fetch(file);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${file}: ${response.statusText}`);
+  }
 
-  return content
-};
+  return await response.text();
+}
+
+async function loadFromFile(file) {
+  return await fs.readFileSync(file, 'utf8');
+}
