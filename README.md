@@ -1,18 +1,9 @@
-# lgputil
+# pac-proxy
 
 ## Installation
 
 ```bash
-npm install -g lgputil
-```
-
-## Pre-config
-
-Set your token and org
-
-```bash
-lgputil config set token <your token>
-lgputil config set org <your org>
+npm install -g pac-proxy
 ```
 
 ## Usage
@@ -20,5 +11,15 @@ lgputil config set org <your org>
 To display help
 
 ```bash
-lgputil
+pac-proxy
+```
+
+Example
+
+```bash
+# Proxy a local pac to local default port
+pac-proxy /foo/bar/pac
+
+# Proxy a remote pac to local port 8080
+pac-proxy https://foo.bar/pac --port 8080
 ```

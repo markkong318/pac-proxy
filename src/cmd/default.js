@@ -18,7 +18,7 @@ const action = async (file, options) => {
 
 const install = (path) => program
   .pathCommand(path)
-  .description('hellow')
+  .description('Create a pac proxy')
   .argument('Pac file')
   .option('--port <port>', 'Port')
   .action(action);

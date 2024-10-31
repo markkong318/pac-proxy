@@ -1,12 +1,11 @@
 {
   "name": "pac-proxy",
   "version": "1.0.0",
-  "description": "CLI utility for Link Game Platform",
+  "description": "Pac Proxy",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "test": "cd test && node --loader=esmock ../node_modules/jasmine/bin/jasmine.js",
-    "bats": "CMD=lgputil GAME_ID=`sed -n 's/^.*\"GAME_ID=\\([^\"]*\\).*/\\1/p' ./.github/workflows/suites.yml` LEADERBOARD_ID=`sed -n 's/^.*\"LEADERBOARD_ID=\\([^\"]*\\).*/\\1/p' ./.github/workflows/suites.yml` bats -j 3 ./test/bats/suites.bats"
+    "test": "cd test && node --loader=esmock ../node_modules/jasmine/bin/jasmine.js"
   },
   "repository": {
     "type": "git",
@@ -27,7 +26,7 @@
     "pac-proxy": "bin/index.js"
   },
   "bugs": {
-    "url": "https://github.com/rakuten-games/lgputil/issues"
+    "url": "https://github.com/markkong318/pac-proxy/issues"
   },
-  "homepage": "https://github.com/rakuten-games/lgputil#readme"
+  "homepage": "https://github.com/markkong318/pac-proxy#readme"
 }

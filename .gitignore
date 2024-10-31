@@ -71,7 +71,7 @@ typings/
 ehthumbs.db
 Thumbs.db
 
-# Webstorm
+# webstorm
 .idea/
 
 # util
