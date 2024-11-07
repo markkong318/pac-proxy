@@ -1,5 +1,7 @@
 # pac-proxy
 
+Map pac file as a proxy to local port
+
 ## Installation
 
 ```bash
