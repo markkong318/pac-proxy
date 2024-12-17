@@ -70,13 +70,13 @@ export default async ({findProxy, port}) => {
     })
     .on('connection', function onConn(cliSoc) {
       cliSoc.$agent = new http.Agent({keepAlive: true});
-      cliSoc.$agent.on('error', err => console.log('agent:', err));
+      cliSoc.$agent.on('error', err => logger.error('agent:', err));
     })
     .listen(port, () => logger.info('http proxy server started on port ' + port));
 
   function onErr(err, msg, url, soc) {
     if (soc) soc.end();
-    logger.error(msg, url, err + '');
+    logger.debug(msg + ' ' + url + ' ' + err + '');
   }
 };
 
