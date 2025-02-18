@@ -1,29 +1,29 @@
-import { program, api } from 'rg-commander';
 import { createPacResolver } from 'pac-resolver';
 import { getQuickJS } from 'quickjs-emscripten';
+import loadProxy from '../api/load-proxy.js';
+import startServer from '../api/start-server.js';
 
-const action = async (file, options) => {
-  const content = await api.loadProxy({file});
+export const action = async ({args, options, logger}) => {
+  const {file} = args;
+  const {port} = options;
+
+  const content = await loadProxy({file});
 
   const quickJS = await getQuickJS();
   const findProxy = createPacResolver(quickJS, content);
 
-  const port = options.port || 8080;
-
-  await api.startServer({
+  await startServer({
     findProxy,
     port,
+    logger,
   })
 };
 
-const install = (path) => program
-  .pathCommand(path)
-  .description('Create a pac proxy')
-  .argument('Pac file')
-  .option('--port <port>', 'Port')
-  .action(action);
-
-export default {
-  action,
-  install,
-};
+export const install = (program) => program
+  .version('1.0.0')
+  .description('Map pac file as a proxy to local port')
+  .argument('<file>', 'Path to the PAC file (local or remote)')
+  .option('--port <port>', 'Local port to use', {
+    validator: program.NUMBER,
+    default: 8080
+  });

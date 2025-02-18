@@ -1,3 +1,1 @@
-import { startModule } from 'rg-commander';
-
-export default startModule();
+export { action } from './cmd/default.js';

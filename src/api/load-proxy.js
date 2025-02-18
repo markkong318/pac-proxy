@@ -1,6 +1,5 @@
 import fs from 'fs';
 import fetch from 'node-fetch';
-import { logger } from 'rg-commander';
 
 export default async ({file}) => {
   return await loadFromUrl(file) || await loadFromFile(file);
