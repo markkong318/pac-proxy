@@ -19,7 +19,7 @@ pac-proxy
 Example
 
 ```bash
-# Proxy a local pac to local default port
+# Proxy a local pac to local default port 8080
 pac-proxy /foo/bar/pac
 
 # Proxy a remote pac to local port 8080
