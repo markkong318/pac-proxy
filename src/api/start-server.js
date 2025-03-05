@@ -2,7 +2,7 @@ import http from 'http';
 import net from 'net';
 import url from 'url';
 
-export default async ({findProxy, port, logger}) => {
+export default async ({ findProxy, port, logger }) => {
   const server = http.createServer(function onCliReq(cliReq, cliRes) {
     // http
     let svrSoc;
@@ -20,7 +20,7 @@ export default async ({findProxy, port, logger}) => {
     });
     cliReq.pipe(svrReq);
     svrReq.on('error', function onSvrReqErr(err) {
-      cliRes.writeHead(400, err.message, {'content-type': 'text/html'});
+      cliRes.writeHead(400, err.message, { 'content-type': 'text/html' });
       cliRes.end('<h1>' + err.message + '<br/>' + cliReq.url + '</h1>');
       onErr(err, 'svrReq', x.hostname + ':' + (x.port || 80), svrSoc);
     });
@@ -70,7 +70,7 @@ export default async ({findProxy, port, logger}) => {
       cliSoc.on('error', err => onErr(err, 'cliSoc', cliReq.url, svrSoc));
     })
     .on('connection', function onConn(cliSoc) {
-      cliSoc.$agent = new http.Agent({keepAlive: true});
+      cliSoc.$agent = new http.Agent({ keepAlive: true });
       cliSoc.$agent.on('error', err => logger.error('agent:', err));
     })
     .listen(port, () => logger.info('http proxy server started on port ' + port));

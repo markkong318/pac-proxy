@@ -1,7 +1,7 @@
 import fs from 'fs';
 import fetch from 'node-fetch';
 
-export default async ({file}) => {
+export default async ({ file }) => {
   return await loadFromUrl(file) || await loadFromFile(file);
 };
 

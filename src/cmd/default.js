@@ -3,11 +3,11 @@ import { getQuickJS } from 'quickjs-emscripten';
 import loadProxy from '../api/load-proxy.js';
 import startServer from '../api/start-server.js';
 
-export const action = async ({args, options, logger}) => {
-  const {file} = args;
-  const {port} = options;
+export const action = async ({ args, options, logger }) => {
+  const { file } = args;
+  const { port } = options;
 
-  const content = await loadProxy({file});
+  const content = await loadProxy({ file });
 
   const quickJS = await getQuickJS();
   const findProxy = createPacResolver(quickJS, content);
