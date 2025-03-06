@@ -2,15 +2,22 @@ import { createPacResolver } from 'pac-resolver';
 import { getQuickJS } from 'quickjs-emscripten';
 import loadProxy from '../api/load-proxy.js';
 import startServer from '../api/start-server.js';
+import wrapper from '../util/wrapper.js';
 
 export const action = async ({ args, options, logger }) => {
   const { file } = args;
   const { port } = options;
 
   const content = await loadProxy({ file });
-
   const quickJS = await getQuickJS();
-  const findProxy = createPacResolver(quickJS, content);
+
+  const createFindProxyAsync = ((quickJS, content) => {
+    return async () => {
+      return createPacResolver(quickJS, content);
+    }
+  })(quickJS, content);
+
+  const findProxy = await wrapper(createFindProxyAsync);
 
   await startServer({
     findProxy,

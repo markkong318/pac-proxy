@@ -19,5 +19,5 @@ async function loadFromUrl(file) {
 }
 
 async function loadFromFile(file) {
-  return await fs.readFileSync(file, 'utf8');
+  return fs.readFileSync(file, 'utf8');
 }
