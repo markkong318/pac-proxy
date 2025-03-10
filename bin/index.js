@@ -2,6 +2,7 @@
 
 import pkg from '@caporal/core';
 import {install, action} from '../src/cmd/default.js';
+import { getVersion } from '../src/util/package.js';
 
 const { program } = pkg;
 
@@ -14,3 +15,5 @@ install(program).action(action);
 program.run().catch((err) => {
   console.error(err);
 });
+
+program.version(getVersion());
